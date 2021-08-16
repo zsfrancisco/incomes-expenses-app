@@ -21,8 +21,8 @@
         <span class="menu-title">Dashboard</span>
       </a>
     </li>
-    <li class="nav-item" routerLink="/incomes-expenses">
-      <a class="nav-link">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/incomes-expenses">
         <i class="menu-icon fa fa-clipboard-list"></i>
         <span class="menu-title">Ingresos y Egresos</span>
       </a>
@@ -34,7 +34,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link cursor" routerLink="/login">
+      <a class="nav-link cursor" (click)="onSignOut()">
         <i class="menu-icon fa fa-sign-out-alt"></i>
         <span class="menu-title">Cerrar sesión</span>
       </a>

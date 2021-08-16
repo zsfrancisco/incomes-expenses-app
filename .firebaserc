@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "income-expenses-8a5e1": {
+      "hosting": {
+        "incomeAndExpensesApp": [
+          "income-expenses-8a5e1"
+        ]
+      }
+    }
+  }
+}

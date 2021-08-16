@@ -4,31 +4,36 @@
       <div class="col-lg-4 mx-auto">
         <h2 class="text-center mb-4" style="color: white;">Ingresar</h2>
         <div class="auto-form-wrapper">
-          <form action="#">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <!--            Email -->
             <div class="form-group">
-              <label class="label">Usuario</label>
+              <label class="label">Correo electrónico</label>
               <div class="input-group">
-                <input class="form-control" placeholder="Email" type="email">
+                <input class="form-control" placeholder="Email" type="email" formControlName="email">
                 <div class="input-group-append">
                   <span class="input-group-text">
-                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-check-circle" *ngIf="form.get('email')?.valid"></i>
                   </span>
                 </div>
               </div>
             </div>
+            <!--            Password-->
             <div class="form-group">
               <label class="label">Contraseña</label>
               <div class="input-group">
-                <input class="form-control" placeholder="*********" type="password">
+                <input class="form-control" placeholder="*********" type="password" formControlName="password">
                 <div class="input-group-append">
                   <span class="input-group-text">
-                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-check-circle" *ngIf="form.get('password')?.valid"></i>
                   </span>
                 </div>
               </div>
             </div>
+            <!--            Action button-->
             <div class="form-group">
-              <button class="btn btn-primary submit-btn btn-block">Login</button>
+              <button class="btn btn-primary submit-btn btn-block" type="submit" [disabled]="form.invalid">
+                Login
+              </button>
             </div>
             <div class="text-block text-center my-3">
               <span class="text-small font-weight-semibold">No estas registrado? </span>
