@@ -1,26 +1,38 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
+import {Store} from "@ngrx/store";
+import {AppState} from "../../app.reducer";
+import * as uiActions from "../../shared/ui.actions";
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styles: []
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
 
   // @ts-ignore
   form: FormGroup;
+  isLoading = false;
+  uiSubscription: Subscription | undefined;
 
-  constructor(private formBuilder: FormBuilder,
-              private authService: AuthService,
+  constructor(private authService: AuthService,
+              private formBuilder: FormBuilder,
+              private store: Store<AppState>,
               private router: Router) {
   }
 
   ngOnInit(): void {
     this.createForm();
+    this.getSubscriptions();
+  }
+
+  ngOnDestroy(): void {
+    this.uiSubscription?.unsubscribe();
   }
 
   createForm(): void {
@@ -31,17 +43,24 @@ export class RegisterComponent implements OnInit {
     })
   }
 
+  getSubscriptions(): void {
+    this.uiSubscription = this.store.select('ui').subscribe(ui => this.isLoading = ui.isLoading);
+  }
+
   async onSubmit(): Promise<void> {
     if (this.form.invalid) return;
     try {
-      Swal.fire({
-        title: 'Registrando usuario, espere por favor',
-        didOpen: () => Swal.showLoading()
-      });
+      this.store.dispatch(uiActions.setLoading({isLoading: true}));
+      //Swal.fire({
+//        title: 'Registrando usuario, espere por favor',
+//        didOpen: () => Swal.showLoading()
+      //    });
       await this.authService.registerUser(this.form.value);
-      Swal.close();
+      this.store.dispatch(uiActions.setLoading({isLoading: false}));
+//      Swal.close();
       await this.router.navigate(['/']);
     } catch (error) {
+      this.store.dispatch(uiActions.setLoading({isLoading: false}));
       Swal.fire({
         icon: 'error',
         title: 'Oops...',

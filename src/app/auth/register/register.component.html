@@ -40,8 +40,17 @@
             </div>
             <!--            Action button-->
             <div class="form-group">
-              <button [disabled]="form.invalid" class="btn btn-primary submit-btn btn-block" type="submit">
+              <button *ngIf="!isLoading"
+                      [disabled]="form.invalid"
+                      class="btn btn-primary submit-btn btn-block"
+                      type="submit">
                 Crear cuenta
+              </button>
+              <button *ngIf="isLoading"
+                      [disabled]="true"
+                      class="btn btn-primary submit-btn btn-block"
+                      type="button">
+                Espere...
               </button>
             </div>
             <div class="text-block text-center my-3">
