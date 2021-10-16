@@ -7,9 +7,9 @@
             <img alt="profile image" src="assets/images/faces/face1.jpg">
           </div>
           <div class="text-wrapper">
-            <p class="profile-name">Francisco Zambrano</p>
+            <p class="profile-name">{{(user$|async)?.name}}</p>
             <div>
-              <small class="designation text-muted">Prins de prins</small>
+              <small class="designation text-muted">{{(user$|async)?.email}}</small>
             </div>
           </div>
         </div>
@@ -34,7 +34,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link cursor" (click)="onSignOut()">
+      <a (click)="onSignOut()" class="nav-link cursor">
         <i class="menu-icon fa fa-sign-out-alt"></i>
         <span class="menu-title">Cerrar sesión</span>
       </a>

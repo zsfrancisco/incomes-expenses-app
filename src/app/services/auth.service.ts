@@ -4,10 +4,11 @@ import {AngularFireAuth} from "@angular/fire/auth";
 import {AngularFirestore} from "@angular/fire/firestore";
 import {Store} from "@ngrx/store";
 import {AppState} from "../app.reducer";
-import {setUser} from "../auth/auth.actions";
-import {User} from "../models/user.model";
+import * as authActions from "../auth/auth.actions";
+import * as incomeExpenseActions from "../income-expense/income-expense.actions";
 import {map} from "rxjs/operators";
 import {Observable, Subscription} from "rxjs";
+import {User} from "../models/user.model";
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,12 @@ export class AuthService {
               private firestore: AngularFirestore) {
   }
 
+  private _user: User | undefined;
+
+  get user(): User | undefined {
+    return this._user;
+  }
+
   initAuthListener() {
     this.auth.authState.subscribe(fbUser => {
       if (fbUser) {
@@ -28,11 +35,15 @@ export class AuthService {
           .valueChanges()
           .subscribe((firestoreUser: User | any) => {
             const user = User.fromFirebase(firestoreUser);
-            this.store.dispatch(setUser({user}));
+            this._user = user;
+            this.store.dispatch(authActions.setUser({user}));
           })
       } else {
+        this._user = undefined;
         this.userSubscription?.unsubscribe();
-        this.store.dispatch(setUser({user: null}));
+        // @ts-ignore
+        this.store.dispatch(authActions.setUser({user: null}));
+        this.store.dispatch(incomeExpenseActions.setItems({items: []}));
       }
     });
   }

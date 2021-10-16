@@ -1,19 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {selectUser} from "../../auth/auth.selectors";
+import {Observable} from "rxjs";
+import {User} from "../../models/user.model";
+import {Store} from "@ngrx/store";
+import {AppState} from "../../app.reducer";
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styles: [
-  ]
+  styles: []
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  user$: Observable<User>;
 
-  ngOnInit(): void {
-    {
-
-    }
+  constructor(private store: Store<AppState>) {
   }
 
+  ngOnInit(): void {
+    this.getSelectors();
+  }
+
+  getSelectors(): void {
+    this.user$ = this.store.select(selectUser);
+  }
 }

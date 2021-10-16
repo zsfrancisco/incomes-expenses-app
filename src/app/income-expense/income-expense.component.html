@@ -6,10 +6,11 @@
         <p class="card-description">
           Especifique el monto y el tipo
         </p>
-        <form>
+        <form (ngSubmit)="onSubmit()" [formGroup]="form">
           <div class="form-group">
             <label>Descripción</label>
             <input class="form-control"
+                   formControlName="description"
                    name="descripcion"
                    placeholder="Descripción"
                    type="text">
@@ -17,6 +18,7 @@
           <div class="form-group">
             <label>Monto</label>
             <input class="form-control"
+                   formControlName="mount"
                    name="monto"
                    placeholder="Monto"
                    type="number">
@@ -25,13 +27,24 @@
           <div class="form-group">
             <label>Tipo</label>
             <br>
-            <button class="btn btn-primary btn-block" type="button">Ingreso</button>
-            <!-- <button type="button" class="btn btn-warning btn-block">Egreso</button> -->
+            <button (click)="type = 'expense'"
+                    *ngIf="type === 'income'"
+                    class="btn btn-primary btn-block"
+                    type="button">
+              Ingreso
+            </button>
+            <button (click)="type = 'income'"
+                    *ngIf="type === 'expense'"
+                    class="btn btn-warning btn-block"
+                    type="button">
+              Egreso
+            </button>
           </div>
           <hr>
-          <button class="btn btn-success mr-2" type="button">
-            <i class="fa fa-save"></i>
-            Agregar
+          <button [disabled]="form.invalid ||(ui$|async)?.isLoading" class="btn btn-success mr-2" type="submit">
+            <i *ngIf="!(ui$|async)?.isLoading" class="fa fa-save"></i>
+            <i *ngIf="(ui$|async)?.isLoading" class="fa fa-spin fa-sync"></i>
+            {{ (ui$|async)?.isLoading ? 'Guardando' : 'Agregar' }}
           </button>
           <!--
             <button disabled class="btn btn-success mr-2">

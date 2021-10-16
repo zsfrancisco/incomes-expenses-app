@@ -3,10 +3,11 @@ import {Action, createReducer, on} from "@ngrx/store";
 import {setUser} from "./auth.actions";
 
 export interface State {
-  user: User | null;
+  user: User;
 }
 
 export const initialState: State = {
+// @ts-ignore
   user: null
 }
 

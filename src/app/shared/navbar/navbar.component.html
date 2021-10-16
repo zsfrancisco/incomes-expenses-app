@@ -12,7 +12,7 @@
     <ul class="navbar-nav navbar-nav-right">
       <li class="nav-item d-none d-sm-inline-block">
         <a aria-expanded="false" class="nav-link" data-toggle="dropdown" href="#" id="UserDropdown">
-          <span class="profile-text">Hello, Francisco Zambrano!</span>
+          <span class="profile-text">¡Hola, {{(user$|async)?.name}}!</span>
           <img alt="Profile image" class="img-xs rounded-circle" src="assets/images/faces/face1.jpg">
         </a>
       </li>

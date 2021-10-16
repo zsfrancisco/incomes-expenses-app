@@ -3,5 +3,5 @@ import {User} from "../models/user.model";
 
 export const setUser = createAction(
   '[Auth] Set User',
-  props<{ user: User | null }>()
+  props<{ user: User }>()
 );

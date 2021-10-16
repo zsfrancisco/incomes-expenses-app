@@ -24,6 +24,7 @@ import {DetailComponent} from './income-expense/detail/detail.component';
 import {FooterComponent} from './shared/footer/footer.component';
 import {NavbarComponent} from './shared/navbar/navbar.component';
 import {SidebarComponent} from './shared/sidebar/sidebar.component';
+import {OrderIncomePipe} from './pipes/order-income.pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {SidebarComponent} from './shared/sidebar/sidebar.component';
     DetailComponent,
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    OrderIncomePipe
   ],
   imports: [
     BrowserModule,

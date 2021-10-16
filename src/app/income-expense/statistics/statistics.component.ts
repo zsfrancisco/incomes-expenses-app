@@ -1,16 +1,58 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Store} from "@ngrx/store";
+import {AppState} from "../../app.reducer";
+import {Observable, of, Subscription} from "rxjs";
+import {IncomeExpense} from "../../models/IncomeExpense";
+import {selectIncomeExpenseItems} from "../income-expense.selectors";
+import {IncomeExpenseEnums} from "../../enums/income-expense.enums";
 
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
-  styles: [
-  ]
+  styles: []
 })
-export class StatisticsComponent implements OnInit {
+export class StatisticsComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  incomes = 0;
+  expenses = 0;
+
+  totalIncomes = 0;
+  totalExpenses = 0;
+
+  incomeExpense$: Observable<IncomeExpense[]> = of([]);
+  incomeExpenseSubscription: Subscription;
+
+  constructor(private store: Store<AppState>) {
+  }
 
   ngOnInit(): void {
+    this.getSelectors();
+  }
+
+  ngOnDestroy(): void {
+    if (this.incomeExpenseSubscription) this.incomeExpenseSubscription.unsubscribe();
+  }
+
+  getSelectors(): void {
+    this.incomeExpense$ = this.store.select(selectIncomeExpenseItems);
+    this.incomeExpenseSubscription = this.incomeExpense$.subscribe(items => this.calculateStatistics(items));
+  }
+
+  calculateStatistics(items: IncomeExpense[]): void {
+    this.incomes = 0;
+    this.expenses = 0;
+    this.totalIncomes = 0;
+    this.totalExpenses = 0;
+
+    for (const item of items) {
+      if (item.type === IncomeExpenseEnums.INCOME) {
+        this.totalIncomes += item.mount;
+        this.incomes++;
+      } else {
+        this.totalExpenses += item.mount;
+        this.expenses++;
+      }
+    }
   }
 
 }
