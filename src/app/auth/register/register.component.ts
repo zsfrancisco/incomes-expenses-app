@@ -51,13 +51,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     if (this.form.invalid) return;
     try {
       this.store.dispatch(uiActions.setLoading({isLoading: true}));
-      //Swal.fire({
-//        title: 'Registrando usuario, espere por favor',
-//        didOpen: () => Swal.showLoading()
-      //    });
       await this.authService.registerUser(this.form.value);
       this.store.dispatch(uiActions.setLoading({isLoading: false}));
-//      Swal.close();
       await this.router.navigate(['/']);
     } catch (error) {
       this.store.dispatch(uiActions.setLoading({isLoading: false}));

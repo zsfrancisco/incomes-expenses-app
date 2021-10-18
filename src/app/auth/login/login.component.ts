@@ -50,12 +50,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.form.invalid) return;
     try {
       this.store.dispatch(uiActions.setLoading({isLoading: true}));
-      //Swal.fire({
-      //  title: 'Iniciando sesión, espere por favor',
-      //  didOpen: () => Swal.showLoading()
-      //});
       await this.authService.signInUser(this.form.value);
-      //Swal.close();
       this.store.dispatch(uiActions.setLoading({isLoading: false}));
       await this.router.navigate(['/']);
     } catch (error) {

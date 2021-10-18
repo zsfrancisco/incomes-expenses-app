@@ -46,12 +46,6 @@
             <i *ngIf="(ui$|async)?.isLoading" class="fa fa-spin fa-sync"></i>
             {{ (ui$|async)?.isLoading ? 'Guardando' : 'Agregar' }}
           </button>
-          <!--
-            <button disabled class="btn btn-success mr-2">
-              <i class="fa fa-spin fa-sync"></i>
-              Espere por favor...
-            </button>
-          -->
           <button class="btn btn-light" type="reset">Cancelar</button>
         </form>
       </div>
