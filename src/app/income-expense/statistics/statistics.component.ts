@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {AppState} from "../../app.reducer";
 import {Observable, of, Subscription} from "rxjs";
 import {IncomeExpense} from "../../models/IncomeExpense";
 import {selectIncomeExpenseItems} from "../income-expense.selectors";
 import {IncomeExpenseEnums} from "../../enums/income-expense.enums";
+import {AppStateComplete} from "../income-expense.reducer";
 
 @Component({
   selector: 'app-statistics',
@@ -22,7 +22,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   incomeExpense$: Observable<IncomeExpense[]> = of([]);
   incomeExpenseSubscription: Subscription;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppStateComplete>) {
   }
 
   ngOnInit(): void {

@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {AppState} from "../../app.reducer";
 import {selectIncomeExpenseItems} from "../income-expense.selectors";
 import {Observable, of} from "rxjs";
 import {IncomeExpenseService} from "../../services/income-expense.service";
 import {IncomeExpense} from "../../models/IncomeExpense";
 import Swal from "sweetalert2";
+import {AppStateComplete} from "../income-expense.reducer";
 
 @Component({
   selector: 'app-detail',
@@ -16,7 +16,7 @@ export class DetailComponent implements OnInit {
 
   incomeExpense$: Observable<IncomeExpense[] | null> = of([]);
 
-  constructor(private store: Store<AppState>, private incomeExpenseService: IncomeExpenseService) {
+  constructor(private store: Store<AppStateComplete>, private incomeExpenseService: IncomeExpenseService) {
   }
 
   ngOnInit(): void {

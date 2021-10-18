@@ -1,5 +1,5 @@
-import {AppState} from "../app.reducer";
 import {createSelector} from "@ngrx/store";
+import {AppStateComplete} from "./income-expense.reducer";
 
-export const selectIncomeExpense = (state: AppState) => state.incomesExpenses;
+export const selectIncomeExpense = (state: AppStateComplete) => state.incomesExpenses;
 export const selectIncomeExpenseItems = createSelector(selectIncomeExpense, incomesExpenses => incomesExpenses.items);
