@@ -1,8 +1,8 @@
 # IncomeAndExpensesApp
-Its a  demo project used to study NgRx with Fernando Herrera's course [# REDUX en Angular con NGRX: Desde las bases hasta la práctica](https://www.udemy.com/course/redux-ngrx-angular/), this project has interesting features and modules, and its principal functionality is manage the incomes and expenses of the users.
+It's a  demo project used to study NgRx with Fernando Herrera's course [REDUX en Angular con NGRX: Desde las bases hasta la práctica](https://www.udemy.com/course/redux-ngrx-angular/), this project has interesting features and modules, and its principal functionality is manage the incomes and expenses of the users.
 
 # PRINCIPAL FUNCTIONS
-You can do it different things in this system, for example
+You can do different things in this system, for example
 
 |                |Module                          |Description                         |
 |----------------|-------------------------------|-----------------------------|
@@ -13,11 +13,11 @@ You can do it different things in this system, for example
 # TECHNICAL INFORMATION
 ## System parts
 
-The systems contents just one principal part
+The systems content just one principal part
 - Front-end.
 ## Front-end
 The front was made in Angular version 12.1.3. NgRx.
-You can run it with the command: ng serve but first you need to run nmp install
+You can run it with the command: ng serve, but first you need to run nmp install
 
 # Creators
 - Francisco Javier Zambrano Santacruz
